@@ -1,6 +1,6 @@
 ﻿namespace ToggleColorClient
 {
-    partial class Form1
+    partial class WinMain
     {
         /// <summary>
         /// Required designer variable.
@@ -51,14 +51,14 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // WinMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(241, 136);
+            this.ClientSize = new System.Drawing.Size(241, 117);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "Form1";
+            this.Name = "WinMain";
             this.Text = "Trivial Application";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

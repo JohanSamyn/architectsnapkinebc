@@ -16,15 +16,15 @@ namespace ToggleColorClient
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var f = new Form1();
+            var wm = new WinMain();
             var cm = new ColorManager();
 
-            f.Out_Start += cm.In_GetInitialColor;
-            f.Out_ToggleColor += cm.In_ToggleColor;
+            wm.Out_Start += cm.In_GetInitialColor;
+            wm.Out_ToggleColor += cm.In_ToggleColor;
 
-            cm.Out_CurrentColor += f.In_CurrentColor;
+            cm.Out_CurrentColor += wm.In_CurrentColor;
 
-            Application.Run(f);
+            Application.Run(wm);
         }
     }
 }

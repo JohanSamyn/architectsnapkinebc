@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace ToggleColorClient
 {
-    public partial class Form1 : Form
+    public partial class WinMain : Form
     {
-        public Form1()
+        public WinMain()
         {
             InitializeComponent();
         }
