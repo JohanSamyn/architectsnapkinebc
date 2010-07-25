@@ -1,0 +1,11 @@
+glob:_ReSharper.*
+glob:*.ReSharper.user
+glob:bin\
+glob:obj\
+glob:*.fbpInf
+glob:*.fbl6
+glob:*.cache
+glob:*.suo
+glob:*.fbl6
+glob:*.fbpInf
+glob:*.fb6lck
