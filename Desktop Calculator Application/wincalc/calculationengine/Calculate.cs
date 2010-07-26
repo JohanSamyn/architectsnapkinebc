@@ -8,11 +8,11 @@ namespace wincalc.calculationengine
 {
     class Calculate
     {
-        public Calculate(Action<Action<double>> ejectNumber,
-                         Action<Tuple<char, double>, Action<double>> applyOperation)
+        public Calculate(Action<Action<double?>> ejectNumber,
+                         Action<Tuple<char, double?>, Action<double>> applyOperation)
         {
             var opToSignal = new DropData<char>();
-            var joinOpAndNumber = new Join<char, double>();
+            var joinOpAndNumber = new Join<char, double?>();
 
             this.In_Process = (c) =>
                 {

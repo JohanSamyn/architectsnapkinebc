@@ -21,12 +21,12 @@ namespace wincalc
             var calcEng = new calculationengine.CalculationEngine();
             var calc = new calculationengine.Calculate(na.EjectNumber, calcEng.In_ApplyOperation);
 
-            wc.Out_NumberCharacter += c => na.ExtendNumber(c, wc.In_CurrentNumber);
+            wc.Out_NumberCharacter += c => na.ExtendNumber(c, n => wc.In_CurrentNumber(n ?? 0.0));
             
             wc.Out_OperationCharacter += c => calc.In_Process(c);
             calc.Out_Result += wc.In_CurrentNumber;
 
-            wc.Out_Clear += () => na.DiscardNumber(wc.In_CurrentNumber);
+            wc.Out_Clear += () => na.DiscardNumber(n => wc.In_CurrentNumber(n ?? 0.0));
 
             Application.Run(wc);
         }

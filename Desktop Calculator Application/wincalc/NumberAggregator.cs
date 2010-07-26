@@ -7,7 +7,7 @@ namespace wincalc
 {
     class NumberAggregator
     {
-        private double currentNumber;
+        private double? currentNumber;
         private double numberFactor;
         private double digitFactor;
 
@@ -18,7 +18,7 @@ namespace wincalc
         }
 
 
-        public void ExtendNumber(char c, Action<double> out_currentNumber)
+        public void ExtendNumber(char c, Action<double?> out_currentNumber)
         {
             if (c == '.')
             {
@@ -30,6 +30,7 @@ namespace wincalc
             }
             else
             {
+                if (this.currentNumber == null) this.currentNumber = 0.0;
                 this.currentNumber = this.currentNumber*this.numberFactor;
                 this.currentNumber += int.Parse(c.ToString()) * this.digitFactor;
                 if (this.digitFactor < 1.0) this.digitFactor *= 0.1;
@@ -39,14 +40,14 @@ namespace wincalc
         }
 
 
-        public void DiscardNumber(Action<double> out_currentNumber)
+        public void DiscardNumber(Action<double?> out_currentNumber)
         {
             Reset();
             out_currentNumber(this.currentNumber);
         }
 
 
-        public void EjectNumber(Action<double> out_currentNumber)
+        public void EjectNumber(Action<double?> out_currentNumber)
         {
             out_currentNumber(this.currentNumber);
             Reset();
@@ -55,7 +56,7 @@ namespace wincalc
         
         private void Reset()
         {
-            this.currentNumber = 0.0;
+            this.currentNumber = null;
             this.numberFactor = 10.0;
             this.digitFactor = 1.0;
         }

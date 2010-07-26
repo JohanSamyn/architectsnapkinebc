@@ -42,7 +42,7 @@ namespace wincalc
             this.textBox1.Text = number.ToString();
         }
 
-        
+
         public event Action<char> Out_NumberCharacter;
         public event Action<char> Out_OperationCharacter;
         public event Action Out_Clear;

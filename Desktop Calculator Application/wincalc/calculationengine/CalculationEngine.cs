@@ -12,13 +12,18 @@ namespace wincalc.calculationengine
         private char operation;
 
 
-        public void In_ApplyOperation(Tuple<char, double> input, Action<double> out_result)
+        public void In_ApplyOperation(Tuple<char, double?> input, Action<double> out_result)
         {
-            if (this.operation == '=') this.operands.Clear();
+            double result;
 
-            this.operands.Push(input.Item2);
-            var result = Calculate();
-
+            if (input.Item2 != null)
+            {
+                if (this.operation == '=') this.operands.Clear();
+                this.operands.Push(input.Item2.Value);
+                result = Calculate();
+            }
+            else
+                result = this.operands.Peek();
             this.operation = input.Item1;
 
             out_result(result);
