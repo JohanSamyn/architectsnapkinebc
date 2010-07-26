@@ -8,13 +8,13 @@ namespace wincalc.calculationengine
 {
     class CalculationEngine
     {
-        private readonly Stack<double> operands = new Stack<double>();
+        private Stack<double> operands = new Stack<double>();
         private char operation;
 
 
         public void In_ApplyOperation(Tuple<char, double?> input, Action<double> out_result)
         {
-            double result;
+            double result = 0.0;
 
             if (input.Item2 != null)
             {
@@ -23,10 +23,17 @@ namespace wincalc.calculationengine
                 result = Calculate();
             }
             else
-                result = this.operands.Peek();
+                if (this.operands.Count > 0)
+                    result = this.operands.Peek();
             this.operation = input.Item1;
 
             out_result(result);
+        }
+
+
+        public void In_Clear()
+        {
+            this.operands = new Stack<double>();
         }
 
 

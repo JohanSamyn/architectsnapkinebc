@@ -26,7 +26,10 @@ namespace wincalc
             wc.Out_OperationCharacter += c => calc.In_Process(c);
             calc.Out_Result += wc.In_CurrentNumber;
 
-            wc.Out_Clear += () => na.DiscardNumber(n => wc.In_CurrentNumber(n ?? 0.0));
+            wc.Out_ClearNumber += () => na.Clear(n => wc.In_CurrentNumber(n ?? 0.0));
+
+            wc.Out_ClearAll += () => na.Clear(n => wc.In_CurrentNumber(n ?? 0.0));
+            wc.Out_ClearAll += calcEng.In_Clear;
 
             Application.Run(wc);
         }

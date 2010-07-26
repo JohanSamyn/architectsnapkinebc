@@ -33,7 +33,13 @@ namespace wincalc
 
         private void btnClearNumber_Click(object sender, EventArgs e)
         {
-            this.Out_Clear();
+            this.Out_ClearNumber();
+        }
+
+
+        private void btnClearAll_Click(object sender, EventArgs e)
+        {
+            this.Out_ClearAll();
         }
 
 
@@ -45,6 +51,8 @@ namespace wincalc
 
         public event Action<char> Out_NumberCharacter;
         public event Action<char> Out_OperationCharacter;
-        public event Action Out_Clear;
+        public event Action Out_ClearNumber;
+        public event Action Out_ClearAll;
+
     }
 }

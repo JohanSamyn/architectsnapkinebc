@@ -40,7 +40,7 @@ namespace wincalc
         }
 
 
-        public void DiscardNumber(Action<double?> out_currentNumber)
+        public void Clear(Action<double?> out_currentNumber)
         {
             Reset();
             out_currentNumber(this.currentNumber);
