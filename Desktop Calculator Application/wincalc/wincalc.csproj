@@ -46,6 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="calculationengine\Calculate.cs" />
+    <Compile Include="calculationengine\CalculationEngine.cs" />
+    <Compile Include="ebc.patterns\Join.cs" />
+    <Compile Include="ebc.patterns\DropData.cs" />
     <Compile Include="NumberAggregator.cs" />
     <Compile Include="WinCalculator.cs">
       <SubType>Form</SubType>

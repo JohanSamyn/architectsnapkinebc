@@ -23,6 +23,13 @@ namespace wincalc
             this.Out_NumberCharacter(c);
         }
 
+        private void btnOp_Click(object sender, EventArgs e)
+        {
+            var c = ((Button)sender).Text[0];
+            this.Out_OperationCharacter(c);
+        }
+
+
 
         private void btnClearNumber_Click(object sender, EventArgs e)
         {
@@ -37,6 +44,7 @@ namespace wincalc
 
         
         public event Action<char> Out_NumberCharacter;
+        public event Action<char> Out_OperationCharacter;
         public event Action Out_Clear;
     }
 }

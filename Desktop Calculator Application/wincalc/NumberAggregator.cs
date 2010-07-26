@@ -45,6 +45,13 @@ namespace wincalc
             out_currentNumber(this.currentNumber);
         }
 
+
+        public void EjectNumber(Action<double> out_currentNumber)
+        {
+            out_currentNumber(this.currentNumber);
+            Reset();
+        }
+
         
         private void Reset()
         {
