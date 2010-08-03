@@ -14,6 +14,7 @@ namespace Indexer
     {
         static void Main(string[] args)
         {
+            // Build
             var crawlDirTree = new Crawl_directory_tree();
             var compileFiles = new Compile_files(crawlDirTree);
 
@@ -28,7 +29,14 @@ namespace Indexer
             var writeIndexToFile = new Write_index_to_file();
             var buildIndex = new Build_index(compileWords, writeIndexToFile);
 
+            // Bind
+            compileFiles.Out_FileFound += extractWords.In_Process;
+            extractWords.Out_WordsExtracted += buildIndex.In_Process;
 
+            compileFiles.Out_IndexFilename += buildIndex.In_IndexFilename;
+
+
+            // Run
         }
     }
 }
