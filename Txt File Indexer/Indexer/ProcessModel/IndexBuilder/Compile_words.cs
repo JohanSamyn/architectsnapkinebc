@@ -1,4 +1,4 @@
-namespace Indexer.ProcessModel.WordExtractor
+namespace Indexer.ProcessModel.IndexBuilder
 {
     public class Compile_words
     {

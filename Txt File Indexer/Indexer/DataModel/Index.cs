@@ -6,7 +6,7 @@ using System.Text;
 namespace Indexer.DataModel
 {
     [Serializable]
-    public class IndexStats
+    public class Index
     {
     }
 }

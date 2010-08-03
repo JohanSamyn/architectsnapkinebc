@@ -43,17 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataModel\Index.cs" />
     <Compile Include="DataModel\IndexStats.cs" />
-    <Compile Include="ProcessModel\WordExtractor\Compile_words.cs" />
+    <Compile Include="ProcessModel\IndexBuilder\Compile_words.cs" />
     <Compile Include="ProcessModel\Composites\Build_index.cs" />
     <Compile Include="ProcessModel\Composites\Compile_files.cs" />
     <Compile Include="ProcessModel\Composites\Extract_words.cs" />
     <Compile Include="ProcessModel\FilesystemAdapter\Crawl_directory_tree.cs" />
     <Compile Include="ProcessModel\FilesystemAdapter\Read_text_lines.cs" />
     <Compile Include="ProcessModel\WordExtractor\Filter_words.cs" />
+    <Compile Include="ProcessModel\WordExtractor\Split_lines_into_words.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProcessModel\Composites\Read_words.cs" />
+    <Compile Include="ProcessModel\Composites\Read_words.cs">
+      <DependentUpon>Extract_words.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProcessModel\IndexAdapter\Write_index_to_file.cs" />
   </ItemGroup>
   <ItemGroup>
