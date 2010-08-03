@@ -27,7 +27,7 @@ namespace Indexer.ProcessModel.Composites
 
         public void In_Process(Tuple<string, string> args)
         {
-            Trace.TraceInformation("Compile_files.In_Process({0}, {1})", args.Item1, args.Item2);
+            Trace.TraceInformation("Compile files({0}, {1})", args.Item1, args.Item2);
             this.in_Process(args);
         }
 

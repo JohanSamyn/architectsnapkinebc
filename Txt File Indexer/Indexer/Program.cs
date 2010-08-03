@@ -29,14 +29,18 @@ namespace Indexer
             var writeIndexToFile = new Write_index_to_file();
             var buildIndex = new Build_index(compileWords, writeIndexToFile);
 
+
             // Bind
             compileFiles.Out_FileFound += extractWords.In_Process;
             extractWords.Out_WordsExtracted += buildIndex.In_Process;
 
             compileFiles.Out_IndexFilename += buildIndex.In_IndexFilename;
 
+            buildIndex.Out_Statistics += stats => Console.WriteLine("Stats received!");
+
 
             // Run
+            compileFiles.In_Process(new Tuple<string, string>(args[0], args[1]));
         }
     }
 }
