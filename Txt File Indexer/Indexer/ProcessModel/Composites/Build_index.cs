@@ -29,7 +29,7 @@ namespace Indexer.ProcessModel.Composites
 
         public void In_Process(Tuple<string, string[]> wordsInFile)
         {
-            Trace.TraceInformation("Build index({0}, {1} words)", wordsInFile.Item1, wordsInFile.Item2.Length);
+            if (wordsInFile != null) Trace.TraceInformation("Build index({0}, {1} words)", wordsInFile.Item1, wordsInFile.Item2.Length);
             this.in_Process(wordsInFile);
         }
 

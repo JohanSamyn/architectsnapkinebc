@@ -36,7 +36,7 @@ namespace Indexer
 
             compileFiles.Out_IndexFilename += buildIndex.In_IndexFilename;
 
-            buildIndex.Out_Statistics += stats => Console.WriteLine("Stats received!");
+            buildIndex.Out_Statistics += stats => Console.WriteLine("{0} words indexed", stats.WordCount);
 
 
             // Run

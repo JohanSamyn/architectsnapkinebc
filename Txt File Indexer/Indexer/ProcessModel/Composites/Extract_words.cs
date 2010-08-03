@@ -19,7 +19,7 @@ namespace Indexer.ProcessModel.Composites
 
         public void In_Process(string filename)
         {
-            Trace.TraceInformation("Extract words({0})", filename);
+            if (filename != null) Trace.TraceInformation("Extract words({0})", filename);
             this.in_Process(filename);
         }
 

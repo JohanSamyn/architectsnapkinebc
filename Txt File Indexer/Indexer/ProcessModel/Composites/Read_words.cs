@@ -20,7 +20,7 @@ namespace Indexer.ProcessModel.Composites
 
         public void In_Process(string filename)
         {
-            Trace.TraceInformation("Read words({0})", filename);
+            if (filename != null) Trace.TraceInformation("Read words({0})", filename);
             this.in_Process(filename);
         }
 

@@ -1,5 +1,7 @@
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 
 namespace Indexer.ProcessModel.FilesystemAdapter
 {
@@ -7,8 +9,20 @@ namespace Indexer.ProcessModel.FilesystemAdapter
     {
         public void In_Process(string filename)
         {
-            Trace.TraceInformation("Read text lines({0})", filename);
-            this.Out_LinesRead(new Tuple<string, string[]>("test.txt", new[]{"w1 stop", "w2"}));
+            if (filename == null)
+            {
+                this.Out_LinesRead(null);
+            }
+            else
+            {
+                Trace.TraceInformation("Read text lines({0})", filename);
+
+                this.Out_LinesRead(new Tuple<string, string[]>(
+                    filename,
+                    File.ReadLines(filename).ToArray()
+                    ));
+            }
+            
         }
 
         public event Action<Tuple<string, string[]>> Out_LinesRead;
