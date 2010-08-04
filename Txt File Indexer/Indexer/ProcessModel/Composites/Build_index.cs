@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using ebc.patterns;
 using Indexer.DataModel;
@@ -9,7 +10,7 @@ namespace Indexer.ProcessModel.Composites
 {
     public class Build_index
     {
-        private readonly Action<Tuple<string, string[]>> in_Process;
+        private readonly Action<IEnumerable<Tuple<string, string[]>>> in_Process;
         private readonly Action<string> in_IndexFilename;
 
 
@@ -27,16 +28,14 @@ namespace Indexer.ProcessModel.Composites
         }
 
 
-        public void In_Process(Tuple<string, string[]> wordsInFile)
+        public void In_Process(IEnumerable<Tuple<string, string[]>> wordsInFile)
         {
-            if (wordsInFile != null) Trace.TraceInformation("Build index({0}, {1} words)", wordsInFile.Item1, wordsInFile.Item2.Length);
             this.in_Process(wordsInFile);
         }
 
 
         public void In_IndexFilename(string indexFilename)
         {
-            Trace.TraceInformation("Build index received index filename({0})", indexFilename);
             this.in_IndexFilename(indexFilename);
         }
 

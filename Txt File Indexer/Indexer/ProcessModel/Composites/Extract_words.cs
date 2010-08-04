@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Indexer.ProcessModel.WordExtractor;
 
@@ -6,7 +7,7 @@ namespace Indexer.ProcessModel.Composites
 {
     public class Extract_words
     {
-        private readonly Action<string> in_Process;
+        private readonly Action<IEnumerable<string>> in_Process;
 
 
         public Extract_words(Read_words readWords, Filter_words filterWords)
@@ -17,13 +18,12 @@ namespace Indexer.ProcessModel.Composites
         }
 
 
-        public void In_Process(string filename)
+        public void In_Process(IEnumerable<string> filename)
         {
-            if (filename != null) Trace.TraceInformation("Extract words({0})", filename);
             this.in_Process(filename);
         }
 
 
-        public event Action<Tuple<string, string[]>>  Out_WordsExtracted;
+        public event Action<IEnumerable<Tuple<string, string[]>>>  Out_WordsExtracted;
     }
 }

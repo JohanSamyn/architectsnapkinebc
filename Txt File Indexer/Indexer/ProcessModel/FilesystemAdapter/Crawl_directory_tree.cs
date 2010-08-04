@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
@@ -10,11 +11,9 @@ namespace Indexer.ProcessModel.FilesystemAdapter
         {
             Trace.TraceInformation("Crawl dir tree({0})", path);
 
-            foreach(var filename in Directory.GetFiles(path, "*.txt", SearchOption.AllDirectories))
-                this.Out_FileFound(filename);
-            this.Out_FileFound(null);
+            this.Out_FileFound(Directory.GetFiles(path, "*.txt", SearchOption.AllDirectories));
         }
 
-        public event Action<string> Out_FileFound;
+        public event Action<IEnumerable<string>> Out_FileFound;
     }
 }

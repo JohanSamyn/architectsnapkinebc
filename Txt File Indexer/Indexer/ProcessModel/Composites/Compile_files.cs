@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using ebc.patterns;
 using Indexer.ProcessModel.FilesystemAdapter;
@@ -27,12 +28,11 @@ namespace Indexer.ProcessModel.Composites
 
         public void In_Process(Tuple<string, string> args)
         {
-            Trace.TraceInformation("Compile files({0}, {1})", args.Item1, args.Item2);
             this.in_Process(args);
         }
 
 
-        public event Action<string> Out_FileFound;
+        public event Action<IEnumerable<string>> Out_FileFound;
         public event Action<string> Out_IndexFilename;
     }
 }

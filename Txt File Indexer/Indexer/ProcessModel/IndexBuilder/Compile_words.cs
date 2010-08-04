@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Indexer.DataModel;
+using System.Linq;
 
 namespace Indexer.ProcessModel.IndexBuilder
 {
@@ -9,22 +11,20 @@ namespace Indexer.ProcessModel.IndexBuilder
         private Index index = new Index();
 
 
-        public void In_Process(Tuple<string, string[]> input)
+        public void In_Process(IEnumerable<Tuple<string, string[]>> input)
         {
-            if (input == null)
+            foreach (var wordsInFiles in input)
             {
-                this.Out_IndexCompiled(this.index);
-                this.Out_Statistics(new IndexStats(this.index.WordCount));
+                Trace.TraceInformation("Compile words({0}, {1} words)", wordsInFiles.Item1, wordsInFiles.Item2.Length);
 
-                this.index = new Index();
+                foreach (var word in wordsInFiles.Item2)
+                    this.index.Add(word, wordsInFiles.Item1);
             }
-            else
-            {
-                Trace.TraceInformation("Compile words({0}, {1} words)", input.Item1, input.Item2.Length);
 
-                foreach (var word in input.Item2)
-                    this.index.Add(word, input.Item1);
-            }
+            this.Out_IndexCompiled(this.index);
+            this.Out_Statistics(new IndexStats(this.index.WordCount));
+
+            this.index = new Index();
         }
 
 
