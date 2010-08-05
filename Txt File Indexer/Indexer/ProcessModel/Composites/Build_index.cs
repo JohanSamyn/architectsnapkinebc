@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using ebc.patterns;
+using ebc.patterns.aspects;
 using Indexer.DataModel;
 using Indexer.ProcessModel.IndexAdapter;
 using Indexer.ProcessModel.IndexBuilder;
@@ -17,10 +19,15 @@ namespace Indexer.ProcessModel.Composites
         public Build_index(Compile_words compileWords, Write_index_to_file writeIndexToFile)
         {
             var joinIndexAndFilename = new Join<Index, string>();
+            var logStats = new Log<IndexStats>(stats => string.Format("{0} words indexed", stats.WordCount));
+            var logFileWords = new LogIEnumerable<Tuple<string, string[]>>(fileWords => string.Format("{0}, {1} words", fileWords.Item1, fileWords.Item2.Count()));
 
-            this.in_Process = _ => compileWords.In_Process(_);
+            this.in_Process = _ => logFileWords.In_Process(_);
+            logFileWords.Out_Data += compileWords.In_Process;
 
-            compileWords.Out_Statistics += _ => this.Out_Statistics(_);
+            compileWords.Out_Statistics += logStats.In_Process;
+            logStats.Out_Data += _ => this.Out_Statistics(_);
+
             compileWords.Out_IndexCompiled += joinIndexAndFilename.Input0;
             this.in_IndexFilename = joinIndexAndFilename.Input1;
 
