@@ -33,9 +33,21 @@ namespace Indexer
             var buildIndex = new Build_index(compileWords, writeIndexToFile);
 
             var logValidationError = new Log<string>(errMsg => "*** " + errMsg);
+            var logException = new Log<Exception>(ex => "*** " + ex.Message + '\n' + ex.StackTrace);
+
+            var handleEx = new HandleException<Tuple<string, string>>();
 
 
             // Bind
+            handleEx.Out_Process += compileFiles.In_Process;
+            handleEx.Out_Exception += logException.In_Process;
+
+            logException.Out_Data += _ =>
+                                        {
+                                            Console.WriteLine("Aborted indexing due to exception!");
+                                            returnCode = 1;
+                                        };
+
             compileFiles.Out_FileFound += extractWords.In_Process;
             extractWords.Out_WordsExtracted += buildIndex.In_Process;
 
@@ -44,15 +56,15 @@ namespace Indexer
             compileFiles.Out_ValidationError += logValidationError.In_Process;
             logValidationError.Out_Data += _ =>
                                                 {
-                                                    Console.WriteLine("Aborting indexing");
-                                                    returnCode = 1;
+                                                    Console.WriteLine("Aborted indexing due to validation error!");
+                                                    returnCode = 2;
                                                 };
 
             buildIndex.Out_Statistics += stats => Console.WriteLine("{0} words indexed", stats.WordCount);
 
 
             // Run
-            compileFiles.In_Process(new Tuple<string, string>(args[0], args[1]));
+            handleEx.In_Process(new Tuple<string, string>(args[0], args[1]));
 
             return returnCode;
         }

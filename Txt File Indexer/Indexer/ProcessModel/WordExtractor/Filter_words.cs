@@ -13,6 +13,8 @@ namespace Indexer.ProcessModel.WordExtractor
             {
                 Trace.TraceInformation("Filter words({0}, {1} words)", wordsInFile.Item1, wordsInFile.Item2.Length);
 
+                throw new ArgumentException("argh!");
+
                 var filteredWords = wordsInFile.Item2.Where(word => word.Length > 3);
                 return new Tuple<string, string[]>(wordsInFile.Item1,
                                                     filteredWords.ToArray());
