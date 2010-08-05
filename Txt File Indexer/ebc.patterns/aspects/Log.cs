@@ -23,11 +23,12 @@ namespace ebc.patterns.aspects
             this.Out_Data(data);
         }
 
-        public event Action<T> Out_Data;
+        public event Action<T> Out_Data= _ => { };
 
 
         private void Write(string logMessage)
         {
+            Trace.TraceInformation("Logging: {0}", logMessage);
             File.AppendAllLines("log.txt", new[]{string.Format("{0}\t{1}", DateTime.Now, logMessage)});
         }
     }
@@ -51,7 +52,7 @@ namespace ebc.patterns.aspects
             this.Out_Data(dataList);
         }
 
-        public event Action<IEnumerable<T>> Out_Data;
+        public event Action<IEnumerable<T>> Out_Data = _ => { };
 
 
         private void Write(string logMessage)

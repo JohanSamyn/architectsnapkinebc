@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using ebc.patterns;
+using ebc.patterns.aspects;
 using Indexer.ProcessModel.FilesystemAdapter;
 
 namespace Indexer.ProcessModel.Composites
@@ -18,8 +20,16 @@ namespace Indexer.ProcessModel.Composites
                 t => t.Item2
                 );
 
+            var validatePath = new Validate<string>(
+                Directory.Exists,
+                path => string.Format("Diretory to be indexed not found: {0}", path)
+                );
+
             this.in_Process = _ => split.Input(_);
-            split.Output0 += crawlDirTree.In_Process;
+            split.Output0 += validatePath.In_Validate;
+            validatePath.Out_ValidData += crawlDirTree.In_Process;
+            validatePath.Out_InvalidData += _ => this.Out_ValidationError(_);
+
             split.Output1 += _ => this.Out_IndexFilename(_);
 
             crawlDirTree.Out_FileFound += _ => this.Out_FileFound(_);
@@ -34,5 +44,6 @@ namespace Indexer.ProcessModel.Composites
 
         public event Action<IEnumerable<string>> Out_FileFound;
         public event Action<string> Out_IndexFilename;
+        public event Action<string> Out_ValidationError;
     }
 }
