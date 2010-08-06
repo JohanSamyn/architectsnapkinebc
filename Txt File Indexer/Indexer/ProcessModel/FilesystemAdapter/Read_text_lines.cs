@@ -3,26 +3,22 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace Indexer.ProcessModel.FilesystemAdapter
 {
     public class Read_text_lines
     {
-        public void In_Process(IEnumerable<string> filenames)
+        public void In_Process(string filename)
         {
-            var linesInFiles = filenames.Select(filename =>
-            {
-                Trace.TraceInformation("Read text lines({0})", filename);
+            Trace.TraceInformation("Read text lines({0}) [Thread {1}]", filename, Thread.CurrentThread.GetHashCode());
 
-                return new Tuple<string, string[]>(
-                    filename,
-                    File.ReadLines(filename).ToArray());
-                                                        
-            });
-            this.Out_LinesRead(linesInFiles);
+            this.Out_LinesRead(new Tuple<string, string[]>(
+                                       filename,
+                                       File.ReadLines(filename).ToArray()));
         }
 
 
-        public event Action<IEnumerable<Tuple<string, string[]>>> Out_LinesRead;
+        public event Action<Tuple<string, string[]>> Out_LinesRead;
     }
 }

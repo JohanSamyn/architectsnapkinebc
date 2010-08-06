@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using Indexer.DataModel;
 using System.Linq;
 
@@ -15,7 +16,7 @@ namespace Indexer.ProcessModel.IndexBuilder
         {
             if(input != null)
             {
-                Trace.TraceInformation("Compile words({0}, {1} words)", input.Item1, input.Item2.Length);
+                Trace.TraceInformation("Compile words({0}, {1} words) [Thread {2}]", input.Item1, input.Item2.Length, Thread.CurrentThread.GetHashCode());
 
                 foreach (var word in input.Item2)
                     this.index.Add(word, input.Item1);

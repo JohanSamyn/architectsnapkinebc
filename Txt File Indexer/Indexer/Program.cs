@@ -41,6 +41,8 @@ namespace Indexer
                                                     finishedProcessing.Set();
                                                 };
 
+            Console.WriteLine("Indexing files in {0} [Thread {1}]", args[0] , Thread.CurrentThread.GetHashCode());
+
             index.In_Process(args[0], args[1]);
 
             finishedProcessing.WaitOne();

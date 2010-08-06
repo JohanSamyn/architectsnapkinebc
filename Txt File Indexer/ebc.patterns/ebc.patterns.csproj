@@ -45,6 +45,8 @@
     <Compile Include="aspects\HandleException.cs" />
     <Compile Include="aspects\Log.cs" />
     <Compile Include="aspects\Validate.cs" />
+    <Compile Include="CountItemsUntilNullForScatter.cs" />
+    <Compile Include="InsertNullAfterItemsForGather.cs" />
     <Compile Include="Join.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Split.cs" />

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ebc.patterns;
 using ebc.patterns.aspects;
 using Indexer.DataModel;
 using Indexer.ProcessModel.Composites;
@@ -39,20 +40,32 @@ namespace Indexer
 
             var handleEx = new HandleException<Tuple<string, string>>();
 
-            var async = new Asynchronize<Tuple<string, string[]>>();
+            var asyncCompileFiles = new Asynchronize<Tuple<string, string>>();
+            var asyncBuildIndex = new Asynchronize<Tuple<string, string[]>>();
+
+            var countFilesFound = new CountItemsUntilNullForScatter<string>();
+            var parExtractWords = new Parallelize<string>();
+            var finishStreamOfFileWordsWithNull = new InsertNullAfterItemsForGather<Tuple<string, string[]>>();
 
 
             // Bind
-            this.in_Process = _ => handleEx.In_Process(_);
+            this.in_Process = _ => asyncCompileFiles.In_Process(_);
 
+            asyncCompileFiles.Out_ProcessSequentially += handleEx.In_Process;
             handleEx.Out_Process += compileFiles.In_Process;
             handleEx.Out_Exception += logException.In_Process;
 
             logException.Out_Data += _ => this.Out_UnhandledException(_);
 
-            compileFiles.Out_FileFound += extractWords.In_Process;
-            extractWords.Out_WordsExtracted += async.In_Process;
-            async.Out_ProcessSequentially += buildIndex.In_Process;
+            compileFiles.Out_FileFound += countFilesFound.In_Count;
+            countFilesFound.Out_Counted += parExtractWords.In_Process;
+            parExtractWords.Out_ProcessInParallel += extractWords.In_Process;
+
+            countFilesFound.Out_Count += finishStreamOfFileWordsWithNull.In_NumberOfItemsToGather;
+
+            extractWords.Out_WordsExtracted += finishStreamOfFileWordsWithNull.In_Process;
+            finishStreamOfFileWordsWithNull.Out_Gather += asyncBuildIndex.In_Process;
+            asyncBuildIndex.Out_ProcessSequentially += buildIndex.In_Process;
 
             compileFiles.Out_IndexFilename += buildIndex.In_IndexFilename;
 

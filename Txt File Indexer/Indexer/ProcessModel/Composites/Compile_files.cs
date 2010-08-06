@@ -42,7 +42,7 @@ namespace Indexer.ProcessModel.Composites
         }
 
 
-        public event Action<IEnumerable<string>> Out_FileFound;
+        public event Action<string> Out_FileFound;
         public event Action<string> Out_IndexFilename;
         public event Action<string> Out_ValidationError;
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace ebc.patterns.aspects
 {
@@ -28,7 +29,7 @@ namespace ebc.patterns.aspects
 
         private void Write(string logMessage)
         {
-            Trace.TraceInformation("Logging: {0}", logMessage);
+            Trace.TraceInformation("Logging: {0} [Thread {1}]", logMessage, Thread.CurrentThread.GetHashCode());
             File.AppendAllLines("log.txt", new[]{string.Format("{0}\t{1}", DateTime.Now, logMessage)});
         }
     }

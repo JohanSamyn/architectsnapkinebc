@@ -7,7 +7,7 @@ namespace Indexer.ProcessModel.Composites
 {
     public class Extract_words
     {
-        private readonly Action<IEnumerable<string>> in_Process;
+        private readonly Action<string> in_Process;
 
 
         public Extract_words(Read_words readWords, Filter_words filterWords)
@@ -18,7 +18,7 @@ namespace Indexer.ProcessModel.Composites
         }
 
 
-        public void In_Process(IEnumerable<string> filename)
+        public void In_Process(string filename)
         {
             this.in_Process(filename);
         }
