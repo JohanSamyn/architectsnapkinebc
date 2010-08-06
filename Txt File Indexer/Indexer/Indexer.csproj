@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="DataModel\Index.cs" />
     <Compile Include="DataModel\IndexStats.cs" />
+    <Compile Include="IndexFiles.cs" />
     <Compile Include="ProcessModel\IndexBuilder\Compile_words.cs" />
     <Compile Include="ProcessModel\Composites\Build_index.cs" />
     <Compile Include="ProcessModel\Composites\Compile_files.cs" />
