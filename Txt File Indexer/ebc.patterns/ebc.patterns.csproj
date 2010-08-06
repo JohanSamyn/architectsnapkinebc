@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="aspects\Asynchronize.cs" />
+    <Compile Include="aspects\Parallelize.cs" />
     <Compile Include="aspects\HandleException.cs" />
     <Compile Include="aspects\Log.cs" />
     <Compile Include="aspects\Validate.cs" />

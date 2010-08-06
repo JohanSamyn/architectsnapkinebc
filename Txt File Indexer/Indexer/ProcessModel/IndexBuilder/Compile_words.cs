@@ -11,24 +11,26 @@ namespace Indexer.ProcessModel.IndexBuilder
         private Index index = new Index();
 
 
-        public void In_Process(IEnumerable<Tuple<string, string[]>> input)
+        public void In_Process(Tuple<string, string[]> input)
         {
-            foreach (var wordsInFiles in input)
+            if(input != null)
             {
-                Trace.TraceInformation("Compile words({0}, {1} words)", wordsInFiles.Item1, wordsInFiles.Item2.Length);
+                Trace.TraceInformation("Compile words({0}, {1} words)", input.Item1, input.Item2.Length);
 
-                foreach (var word in wordsInFiles.Item2)
-                    this.index.Add(word, wordsInFiles.Item1);
+                foreach (var word in input.Item2)
+                    this.index.Add(word, input.Item1);
             }
+            else
+            {
+                this.Out_IndexCompiled(this.index);
+                this.Out_Statistics(new IndexStats(this.index.WordCount));
 
-            this.Out_IndexCompiled(this.index);
-            this.Out_Statistics(new IndexStats(this.index.WordCount));
-
-            this.index = new Index();
+                this.index = new Index();
+            }
         }
 
 
-        public event Action<IndexStats> Out_Statistics;
         public event Action<Index> Out_IndexCompiled;
+        public event Action<IndexStats> Out_Statistics;
     }
 }

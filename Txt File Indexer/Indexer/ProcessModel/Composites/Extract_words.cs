@@ -24,6 +24,6 @@ namespace Indexer.ProcessModel.Composites
         }
 
 
-        public event Action<IEnumerable<Tuple<string, string[]>>>  Out_WordsExtracted;
+        public event Action<Tuple<string, string[]>>  Out_WordsExtracted;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using ebc.patterns.aspects;
 using Indexer.ProcessModel.Composites;
 using Indexer.ProcessModel.FilesystemAdapter;
@@ -15,6 +16,7 @@ namespace Indexer
     {
         static int Main(string[] args)
         {
+            var finishedProcessing = new AutoResetEvent(false);
             int returnCode = 0;
 
             // Build
@@ -37,6 +39,8 @@ namespace Indexer
 
             var handleEx = new HandleException<Tuple<string, string>>();
 
+            var async = new Asynchronize<Tuple<string, string[]>>();
+
 
             // Bind
             handleEx.Out_Process += compileFiles.In_Process;
@@ -46,10 +50,12 @@ namespace Indexer
                                         {
                                             Console.WriteLine("Aborted indexing due to exception!");
                                             returnCode = 1;
+                                            finishedProcessing.Set();
                                         };
 
             compileFiles.Out_FileFound += extractWords.In_Process;
-            extractWords.Out_WordsExtracted += buildIndex.In_Process;
+            extractWords.Out_WordsExtracted += async.In_Process;
+            async.Out_ProcessSequentially += buildIndex.In_Process;
 
             compileFiles.Out_IndexFilename += buildIndex.In_IndexFilename;
             
@@ -58,14 +64,20 @@ namespace Indexer
                                                 {
                                                     Console.WriteLine("Aborted indexing due to validation error!");
                                                     returnCode = 2;
+                                                    finishedProcessing.Set();
                                                 };
 
-            buildIndex.Out_Statistics += stats => Console.WriteLine("{0} words indexed", stats.WordCount);
+            buildIndex.Out_Statistics += stats =>
+                                             {
+                                                 Console.WriteLine("{0} words indexed", stats.WordCount);
+                                                 finishedProcessing.Set();
+                                             };
 
 
             // Run
             handleEx.In_Process(new Tuple<string, string>(args[0], args[1]));
 
+            finishedProcessing.WaitOne();
             return returnCode;
         }
     }

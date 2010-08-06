@@ -12,7 +12,7 @@ namespace Indexer.ProcessModel.Composites
 {
     public class Build_index
     {
-        private readonly Action<IEnumerable<Tuple<string, string[]>>> in_Process;
+        private readonly Action<Tuple<string, string[]>> in_Process;
         private readonly Action<string> in_IndexFilename;
 
 
@@ -20,7 +20,9 @@ namespace Indexer.ProcessModel.Composites
         {
             var joinIndexAndFilename = new Join<Index, string>();
             var logStats = new Log<IndexStats>(stats => string.Format("{0} words indexed", stats.WordCount));
-            var logFileWords = new LogIEnumerable<Tuple<string, string[]>>(fileWords => string.Format("{0}, {1} words", fileWords.Item1, fileWords.Item2.Count()));
+            var logFileWords = new Log<Tuple<string, string[]>>(fileWords => 
+                                        fileWords != null ? string.Format("{0}, {1} words", fileWords.Item1, fileWords.Item2.Count())
+                                                          : "EOD of words to index");
 
             this.in_Process = _ => logFileWords.In_Process(_);
             logFileWords.Out_Data += compileWords.In_Process;
@@ -35,7 +37,7 @@ namespace Indexer.ProcessModel.Composites
         }
 
 
-        public void In_Process(IEnumerable<Tuple<string, string[]>> wordsInFile)
+        public void In_Process(Tuple<string, string[]> wordsInFile)
         {
             this.in_Process(wordsInFile);
         }

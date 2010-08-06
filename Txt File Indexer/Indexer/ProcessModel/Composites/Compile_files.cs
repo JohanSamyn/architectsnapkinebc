@@ -16,8 +16,8 @@ namespace Indexer.ProcessModel.Composites
         public Compile_files(Crawl_directory_tree crawlDirTree)
         {
             var split = new Split<Tuple<string, string>, string, string>(
-                t => t.Item1,
-                t => t.Item2
+                t => t.Item2,
+                t => t.Item1
                 );
 
             var validatePath = new Validate<string>(
@@ -26,11 +26,11 @@ namespace Indexer.ProcessModel.Composites
                 );
 
             this.in_Process = _ => split.Input(_);
-            split.Output0 += validatePath.In_Validate;
+            split.Output1 += validatePath.In_Validate;
             validatePath.Out_ValidData += crawlDirTree.In_Process;
             validatePath.Out_InvalidData += _ => this.Out_ValidationError(_);
 
-            split.Output1 += _ => this.Out_IndexFilename(_);
+            split.Output0 += _ => this.Out_IndexFilename(_);
 
             crawlDirTree.Out_FileFound += _ => this.Out_FileFound(_);
         }
