@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F62111CC-EDA4-487D-937A-C9896F16623C}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{71F58227-C8C7-438C-8900-4D4E29FDF067}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Indexer</RootNamespace>
-    <AssemblyName>Indexer</AssemblyName>
+    <RootNamespace>Indexer.WinForms</RootNamespace>
+    <AssemblyName>Indexer.WinForms</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -33,9 +33,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -43,31 +40,62 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataModel\Index.cs" />
-    <Compile Include="DataModel\IndexStats.cs" />
-    <Compile Include="IndexFiles.cs" />
-    <Compile Include="ProcessModel\IndexBuilder\Compile_words.cs" />
-    <Compile Include="ProcessModel\Composites\Build_index.cs" />
-    <Compile Include="ProcessModel\Composites\Compile_files.cs" />
-    <Compile Include="ProcessModel\Composites\Extract_words.cs" />
-    <Compile Include="ProcessModel\FilesystemAdapter\Crawl_directory_tree.cs" />
-    <Compile Include="ProcessModel\FilesystemAdapter\Read_text_lines.cs" />
-    <Compile Include="ProcessModel\WordExtractor\Filter_words.cs" />
-    <Compile Include="ProcessModel\WordExtractor\Split_lines_into_words.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProcessModel\Composites\Read_words.cs">
-      <DependentUpon>Extract_words.cs</DependentUpon>
+    <Compile Include="WinIndex.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProcessModel\IndexAdapter\Write_index_to_file.cs" />
+    <Compile Include="WinIndex.Designer.cs">
+      <DependentUpon>WinIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="WinIndex.resx">
+      <DependentUpon>WinIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ebc.patterns\ebc.patterns.csproj">
       <Project>{9F09C26D-4895-47FA-A28D-783AB44152F9}</Project>
       <Name>ebc.patterns</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Indexer\Indexer.csproj">
+      <Project>{F62111CC-EDA4-487D-937A-C9896F16623C}</Project>
+      <Name>Indexer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestData\file with 1 line and 2 words.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\file with 3 lines and 5 words.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\MoreTestData\file with longer text.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

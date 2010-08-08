@@ -58,6 +58,12 @@ namespace Indexer
             logException.Out_Data += _ => this.Out_UnhandledException(_);
 
             compileFiles.Out_FileFound += countFilesFound.In_Count;
+            compileFiles.Out_FileFound += filename =>
+                                              {
+                                                  if (filename != null)
+                                                      this.Out_FileFoundToIndex(filename);
+                                              };
+
             countFilesFound.Out_Counted += parExtractWords.In_Process;
             parExtractWords.Out_ProcessInParallel += extractWords.In_Process;
 
@@ -76,12 +82,19 @@ namespace Indexer
         }
 
 
-        public void In_Process(string path, string indexFilename)
+        public void Index(string path, string indexFilename)
         {
-            this.in_Process(new Tuple<string, string>(path, indexFilename));   
+            this.In_Process(new Tuple<string, string>(path, indexFilename));   
+        }
+
+        public void In_Process(Tuple<string, string> args)
+        {
+            this.in_Process(args);   
         }
 
 
+
+        public event Action<string> Out_FileFoundToIndex;
         public event Action<IndexStats> Out_Statistics;
 
         public event Action<string> Out_ValidationError;
