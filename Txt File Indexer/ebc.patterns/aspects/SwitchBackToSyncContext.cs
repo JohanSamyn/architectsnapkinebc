@@ -24,12 +24,12 @@ namespace ebc.patterns.aspects
             if (this.ctx != null)
                 this.ctx.Send(x =>
                 {
-                    Trace.TraceInformation("Switching back to sync ctx: {0}", msg.GetType().Name);
+                    Trace.TraceInformation("Switching back to sync ctx: {0}", msg);
                     this.Out_ContinueInSyncContext(msg);
                 }, null);
             else
             {
-                Trace.TraceInformation("No syn ctx switch back: {0}", msg.GetType().Name);
+                Trace.TraceInformation("No syn ctx switch back: {0}", msg);
                 this.Out_ContinueInSyncContext(msg);
             }
         }

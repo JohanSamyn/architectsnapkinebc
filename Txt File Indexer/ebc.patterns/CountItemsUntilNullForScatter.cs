@@ -19,7 +19,7 @@ namespace ebc.patterns
                 Trace.TraceInformation("CountUntilNull({0}) [Thread {1}]", this.counter, Thread.CurrentThread.GetHashCode());
 
                 this.Out_Count(this.counter);
-                this.counter = -1;
+                this.counter = 0;
             }
             else
             {
