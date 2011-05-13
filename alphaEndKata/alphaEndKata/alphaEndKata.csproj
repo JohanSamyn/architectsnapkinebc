@@ -46,7 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinaryConverter.cs" />
+    <Compile Include="AbstractConverter.cs" />
     <Compile Include="Converter.cs" />
+    <Compile Include="HexConverter.cs" />
+    <Compile Include="OctalConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
