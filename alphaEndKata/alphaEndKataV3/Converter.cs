@@ -9,9 +9,14 @@ namespace alphaEndKataV3
     {
         public string Convert(int n10)
         {
-            string nBased = "";
-
             int basePower = Determine_basePower(n10);
+
+            return Builder_nBase_number(n10, basePower);
+        }
+
+        private string Builder_nBase_number(int n10, int basePower)
+        {
+            string nBased = "";
 
             while (basePower >= 0)
             {
@@ -22,7 +27,6 @@ namespace alphaEndKataV3
                 n10 = remainder;
                 basePower--;
             }
-
             return nBased;
         }
 
