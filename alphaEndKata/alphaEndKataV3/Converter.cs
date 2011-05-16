@@ -26,20 +26,19 @@ namespace alphaEndKataV3
             return nBased;
         }
 
-        private string Map_factor_to_digit(int factor)
+        private char Map_factor_to_digit(int factor)
         {
-            return "5";
+            return "01234567890xyz"[factor];
         }
 
         private void Calc_factor_and_remainder(int n10, int basePower, out int factor, out int remainder)
         {
-            factor = 5;
-            remainder = 0;
+            factor = Math.DivRem(n10, (int)Math.Pow(13, basePower), out remainder);
         }
 
         private int Determine_basePower(int n10)
         {
-            return 0;
+            return (int)Math.Truncate(Math.Log10(n10)/Math.Log10(13));
         }
     }
 }
