@@ -28,7 +28,7 @@ namespace alphaEndKataV3
 
         private char Map_factor_to_digit(int factor)
         {
-            return "01234567890xyz"[factor];
+            return "0123456789xyz"[factor];
         }
 
         private void Calc_factor_and_remainder(int n10, int basePower, out int factor, out int remainder)
