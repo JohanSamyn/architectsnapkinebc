@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Version 2 all in one", "Ver
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "alphaEndKataV2", "alphaEndKataV2\alphaEndKataV2.csproj", "{D8FA84D7-67B9-48EA-944D-CFDE1B34AB1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "alphaEndKataV3", "alphaEndKataV3\alphaEndKataV3.csproj", "{1B6EDC3F-F9BC-4F44-9458-841C9515A019}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Version 3 with tracer bullet", "Version 3 with tracer bullet", "{737875AD-F4E4-4DC0-80D8-B6793B929F27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,16 @@ Global
 		{D8FA84D7-67B9-48EA-944D-CFDE1B34AB1F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D8FA84D7-67B9-48EA-944D-CFDE1B34AB1F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D8FA84D7-67B9-48EA-944D-CFDE1B34AB1F}.Release|x86.ActiveCfg = Release|Any CPU
+		{1B6EDC3F-F9BC-4F44-9458-841C9515A019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B6EDC3F-F9BC-4F44-9458-841C9515A019}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B6EDC3F-F9BC-4F44-9458-841C9515A019}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1B6EDC3F-F9BC-4F44-9458-841C9515A019}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1B6EDC3F-F9BC-4F44-9458-841C9515A019}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1B6EDC3F-F9BC-4F44-9458-841C9515A019}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B6EDC3F-F9BC-4F44-9458-841C9515A019}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B6EDC3F-F9BC-4F44-9458-841C9515A019}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1B6EDC3F-F9BC-4F44-9458-841C9515A019}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1B6EDC3F-F9BC-4F44-9458-841C9515A019}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,5 +73,6 @@ Global
 		{E31351FD-D2B9-4F40-B7C7-C014BA693DF2} = {1931A6E5-00CE-46AC-A378-F4B8D4066AB4}
 		{2699AF6F-D4AB-4C85-A966-87897EC814C2} = {1931A6E5-00CE-46AC-A378-F4B8D4066AB4}
 		{D8FA84D7-67B9-48EA-944D-CFDE1B34AB1F} = {541DE240-0346-4499-BABB-50F086A85814}
+		{1B6EDC3F-F9BC-4F44-9458-841C9515A019} = {737875AD-F4E4-4DC0-80D8-B6793B929F27}
 	EndGlobalSection
 EndGlobal
