@@ -11,10 +11,10 @@ namespace alphaEndKata
         private readonly char[] _digits_of_targetSystem;
 
 
-        protected AbstractConverter(int baseOfTargetSystem, char[] digitsOfTargetSystem)
+        protected AbstractConverter(char[] digitsOfTargetSystem)
         {
-            _base_of_targetSystem = baseOfTargetSystem;
             _digits_of_targetSystem = digitsOfTargetSystem;
+            _base_of_targetSystem = digitsOfTargetSystem.Length;
         }
 
 

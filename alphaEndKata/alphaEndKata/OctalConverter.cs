@@ -6,7 +6,7 @@ namespace alphaEndKata
 {
     public class OctalConverter : AbstractConverter
     {
-        public OctalConverter() : base(8, new[] { '0', '1', '2', '3', '4', '5', '6', '7' })
+        public OctalConverter() : base(new[] { '0', '1', '2', '3', '4', '5', '6', '7' })
         { }
     }
 }

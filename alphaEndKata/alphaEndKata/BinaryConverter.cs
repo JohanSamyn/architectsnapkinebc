@@ -6,7 +6,7 @@ namespace alphaEndKata
 {
     public class BinaryConverter : AbstractConverter
     {
-        public BinaryConverter() : base(2, new[] {'0', '1'})
+        public BinaryConverter() : base(new[] {'0', '1'})
         {}
     }
 }
