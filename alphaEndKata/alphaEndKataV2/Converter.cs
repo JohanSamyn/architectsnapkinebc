@@ -38,7 +38,7 @@ namespace CanUDoIt
 
         private int Determine_basePower(int n10)
         {
-            return (int)Math.Truncate(Math.Log10(n10)/Math.Log10(n10));
+            return (int)Math.Truncate(Math.Log10(n10)/Math.Log10(13));
         }
 
     }
